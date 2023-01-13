@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Users from "./components/users";
 import SearchStatus from "./components/searchStatus";
 import api from "./api"
 import MakeUsers from './components/users';
@@ -10,16 +9,16 @@ function App (){
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
-    //нужно разработать еще этот переключатель
-    const handleToggleBookmark = (id) =>{
+   
+    const handleToggleBookmark = (userId) =>{
+    const newUsers = users.map((user)=> user._id === userId? {...user, bookmark:!user.bookmark }:user)
+    setUsers(newUsers);
     }
-    // в ретюрн тоже надо еще придумать код какой перенсти
+    
     return (
         <>
-        <SearchStatus/>
-        <div>
-            <MakeUsers/>
-        </div>
+        <SearchStatus length={users.length}/>
+        <MakeUsers users={users} onHandleDelete={handleDelete} onHandleToggleBookmark={handleToggleBookmark}/>
         </>
     )
 }

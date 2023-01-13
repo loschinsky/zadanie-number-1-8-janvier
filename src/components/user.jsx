@@ -1,24 +1,40 @@
 import React from 'react';
 import MakeBookmark from './bookmark';
 import MakeQuality from './qualitie';
-const MakeUser = ()=>{
+const MakeUser = ({
+    name,
+    completedMeetings,
+    profession,
+    qualities,
+    rate,
+    _id,
+    bookmark,
+    onHandleDelete1,
+    onHandleToggleBookmark1
+})=>{
     return (
-        <tr key={user._id}>
-                            <td>{user.name}</td>
+                        <tr>
+                            <td>{name}</td>
                             <td>
-                                {user.qualities.map((item) => (
-                                    <MakeQuality/>
+                                {qualities.map((item) => (
+                                    <MakeQuality
+                                    key={item._id}
+                                    {...item}/>
                                 ))}
                             </td>
-                            <td>{user.profession.name}</td>
-                            <td>{user.completedMeetings}</td>
-                            <td>{user.rate} /5</td>
-                            <td><button> 
-                                <MakeBookmark/>
-                                </button></td>
+                            <td>{profession.name}</td>
+                            <td>{completedMeetings}</td>
+                            <td>{rate} /5</td>
+                            <td> 
+                                <MakeBookmark
+                                id={_id}
+                                status={bookmark}
+                                onHandleToggleBookmark1={onHandleToggleBookmark1}
+                                />
+                            </td>
                             <td>
                                 <button
-                                    onClick={() => handleDelete(user._id)}
+                                    onClick={() => onHandleDelete1(_id)}
                                     className="btn btn-danger"
                                 >
                                     delete

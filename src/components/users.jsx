@@ -1,21 +1,10 @@
-import React, { useState } from "react";
-import api from "../api"
+import React from "react";
 import MakeUser from "./user";
 
-const MakeUsers = () => {
+const MakeUsers = ({users, onHandleDelete, onHandleToggleBookmark}) => {
     
     return (
         <>
-            <h2>
-                <span
-                    className={"badge " + (users.length > 0 ? "bg-primary" : "bg-danger")}
-                >
-                    {users.length > 0
-                        ? `${users.length + " " + renderPhrase(users.length)} с тобой сегодня`
-                        : "Никто с тобой не тусанет"}
-                </span>
-            </h2>
-
             {users.length > 0 && (
                 <table className="table">
                     <thead>
@@ -31,7 +20,11 @@ const MakeUsers = () => {
                     </thead>
                     <tbody>
                         {users.map((user) => (
-                            <MakeUser/>
+                            <MakeUser
+                            key={user._id}
+                            {...user}
+                            onHandleToggleBookmark1={onHandleToggleBookmark}
+                            onHandleDelete1={onHandleDelete}/>
                         ))}
                     </tbody>
                 </table>

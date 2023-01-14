@@ -4,6 +4,7 @@ import { paginate } from "../utils/paginate";
 import Pagination from "./pagination";
 import MakeUser from "./user";
 import PropTypes from "prop-types";
+import GroupList from "./groupList";
 
 const MakeUsers = ({ users, onHandleDelete, onHandleToggleBookmark }) => {
     const count = users.length;
@@ -16,7 +17,7 @@ const MakeUsers = ({ users, onHandleDelete, onHandleToggleBookmark }) => {
     const userCrop = paginate(users, currentPage, pageSize);
 
     return (
-        <>
+        <>  <GroupList/>
             {count > 0 && (
                 <table className="table">
                     <thead>

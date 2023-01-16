@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SearchStatus from "./components/searchStatus";
 import api from "./api";
 import MakeUsers from "./components/users";
 
@@ -18,7 +17,6 @@ function App() {
 
     return (
         <>
-            <SearchStatus length={users.length} />
             <MakeUsers
                 users={users}
                 onHandleDelete={handleDelete}

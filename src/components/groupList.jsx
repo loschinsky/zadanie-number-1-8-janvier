@@ -17,7 +17,7 @@ export default GroupList;
 GroupList.defaultProps = {
     valueProperty: "_id",
     contentProperty: "name"
-};пше
+};
 GroupList.propTypes = {
     items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     valueProperty: PropTypes.string.isRequired,

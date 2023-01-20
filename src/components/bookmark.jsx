@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-const MakeBookmark = ({ onHandleToggleBookmark1, status, id }) => {
+const MakeBookmark = ({ status, ...rest }) => {
     return (
-        <button onClick={() => onHandleToggleBookmark1(id)}>
+        <button {...rest}>
             <i className={"bi bi-0-circle" + (status ? "-fill" : "")}></i>
         </button>
     );
 };
 export default MakeBookmark;
 MakeBookmark.propTypes = {
-    onHandleToggleBookmark1: PropTypes.func.isRequired,
-    status: PropTypes.bool.isRequired,
-    id: PropTypes.string.isRequired
+    status: PropTypes.bool.isRequired
 };

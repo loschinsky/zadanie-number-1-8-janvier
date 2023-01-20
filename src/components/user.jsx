@@ -10,8 +10,8 @@ const MakeUser = ({
     rate,
     _id,
     bookmark,
-    onHandleDelete1,
-    onHandleToggleBookmark1
+    onHandleDelete,
+    onHandleToggleBookmark
 }) => {
     return (
         <tr>
@@ -26,14 +26,15 @@ const MakeUser = ({
             <td>{rate} /5</td>
             <td>
                 <MakeBookmark
-                    id={_id}
                     status={bookmark}
-                    onHandleToggleBookmark1={onHandleToggleBookmark1}
+                    onClick={() => onHandleToggleBookmark(_id)}
+                    
+                    
                 />
             </td>
             <td>
                 <button
-                    onClick={() => onHandleDelete1(_id)}
+                    onClick={() => onHandleDelete(_id)}
                     className="btn btn-danger"
                 >
                     delete

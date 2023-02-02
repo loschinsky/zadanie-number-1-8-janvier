@@ -7,7 +7,7 @@ import api from "../api";
 import SearchStatus from "./searchStatus";
 import UserTable from "./usersTable";
 import _ from "lodash";
-const MakeUsers = () => {
+const UsersList = () => {
     const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
@@ -108,8 +108,8 @@ const MakeUsers = () => {
     return "Загрузка...";
 };
 
-export default MakeUsers;
-MakeUsers.propTypes = {
+export default UsersList;
+UsersList.propTypes = {
     users: PropTypes.array.isRequired,
     onHandleDelete: PropTypes.func.isRequired,
     onHandleToggleBookmark: PropTypes.func.isRequired

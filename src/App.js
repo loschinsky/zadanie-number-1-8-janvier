@@ -1,9 +1,9 @@
 import React from "react";
 import NavBar from "./components/navBar";
-import { Route, Switch } from "react-router-dom";
-import Login from "./components/login";
-import Main from "./components/main";
-import CompWhoChooseWhatToShow from "./components/componentWhoChooseWhatToShow";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Login from "./layouts/login";
+import Main from "./layouts/main";
+import CompWhoChooseWhatToShow from "./layouts/users";
 
 function App() {
     return (
@@ -12,11 +12,11 @@ function App() {
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route
-                    path="/users/:userId"
+                    path="/users/:userId?"
                     component={CompWhoChooseWhatToShow}
                 />
-                <Route path="/users/" component={CompWhoChooseWhatToShow} />
                 <Route exact path="/" component={Main} />
+                <Redirect to="/" />
             </Switch>
         </div>
     );

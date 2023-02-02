@@ -2,6 +2,7 @@ import api from "../api";
 import PropTypes from "prop-types";
 import { React, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import MakeQuality from "./qualitie";
 const UserPage = ({ userId }) => {
     const history = useHistory();
     const [user, setUser] = useState();
@@ -21,13 +22,7 @@ const UserPage = ({ userId }) => {
                     <div>
                         {user.qualities.map((q) => {
                             return (
-                                <span key={q._id}
-                                    className={
-                                        "badge m-1 bg-" + q.color
-                                    }
-                                >
-                                    {q.name}
-                                </span>
+                                <MakeQuality key={q._id} color={q.color} name={q.name}/>
                             );
                         })}
                     </div>

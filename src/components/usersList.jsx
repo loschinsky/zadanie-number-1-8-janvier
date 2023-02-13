@@ -14,6 +14,7 @@ const UsersList = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const [users, setUsers] = useState();
+    const [searchStatus, setSearchStatus] = useState("");
     useEffect(() => {
         api.users.fetchAll().then((data) => {
             setUsers(data);
@@ -36,6 +37,7 @@ const UsersList = () => {
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedProf]);
+
     const handlePageChange = (pageIngex) => {
         setCurrentPage(pageIngex);
     };
@@ -43,16 +45,27 @@ const UsersList = () => {
         setSortBy(item);
     };
     const handleProffesionSelect = (item) => {
+        setSearchStatus("");
         setSelectedProf(item);
+    };
+    const handleChange = ({ target }) => {
+        setSelectedProf(undefined);
+        setSearchStatus(target.value);
     };
     if (users) {
         const filteredUsers =
             selectedProf && selectedProf._id
                 ? users.filter(
-                    (user) =>
-                        JSON.stringify(user.profession) ===
-                        JSON.stringify(selectedProf)
-                )
+                      (user) =>
+                          JSON.stringify(user.profession._id) ===
+                          JSON.stringify(selectedProf._id)
+                  )
+                : searchStatus
+                ? users.filter((user) =>
+                      user.name
+                          .toLowerCase()
+                          .includes(searchStatus.toLowerCase())
+                  )
                 : users;
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
@@ -62,6 +75,7 @@ const UsersList = () => {
         );
         const userCrop = paginate(sortedUsers, currentPage, pageSize);
         const clearFilter = () => {
+            setSearchStatus("");
             setSelectedProf();
         };
 
@@ -84,6 +98,16 @@ const UsersList = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
+                    <div>
+                        <input
+                            className="w-100"
+                            placeholder="Search..."
+                            value={searchStatus}
+                            type="text"
+                            onChange={handleChange}
+                            onClick={clearFilter} 
+                        ></input>
+                    </div>
                     {count > 0 && (
                         <UserTable
                             users={userCrop}

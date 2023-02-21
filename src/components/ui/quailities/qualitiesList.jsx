@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MakeQuality from "./qualitie";
-const QualitiesList = ({ qualities }) => {
+import Quality from "./qualitie";
+
+const Qualities = ({ qualities }) => {
     return (
         <>
             {qualities.map((item) => (
-                <MakeQuality key={item._id} {...item} />
+                <Quality key={item._id} {...item} />
             ))}
         </>
     );
 };
 
-export default QualitiesList;
-
-QualitiesList.propTypes = {
+Qualities.propTypes = {
     qualities: PropTypes.array
 };
+
+export default Qualities;

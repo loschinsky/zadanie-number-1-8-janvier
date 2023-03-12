@@ -7,7 +7,6 @@ import UserListPageEdit from "../components/page/userListPageEdit/userListPageEd
 const Users = () => {
     const params = useParams();
     const { userId, edit } = params;
-    console.log(edit);
     return (
         <>
             {userId ? (

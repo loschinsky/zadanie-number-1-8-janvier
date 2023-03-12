@@ -38,11 +38,14 @@ const SelectField = ({
                     {defaultOption}
                 </option>
                 {optionsArray.length > 0 &&
-                    optionsArray.map((option) => (
-                        <option value={option.value} key={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
+                    optionsArray.map((option) => {
+                        console.log(option);
+                        return (
+                            <option value={option.value} key={option.value}>
+                                {option.label}
+                            </option>
+                        );
+                    })}
             </select>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>

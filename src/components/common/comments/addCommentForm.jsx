@@ -38,7 +38,7 @@ const AddCommentForm = ({ onSubmit }) => {
         setErrors({});
     };
     const handleSubmit = (e) => {
-        e.preventDefaut();
+        e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
         onSubmit(data);

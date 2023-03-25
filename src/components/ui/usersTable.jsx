@@ -5,6 +5,7 @@ import BookMark from "../common/bookmark";
 import Qualities from "./quailities";
 import Table from "../common/table";
 import { Link } from "react-router-dom";
+import Profession from "./profession";
 
 const UserTable = ({
     users,
@@ -26,31 +27,34 @@ const UserTable = ({
             name: "Качества",
             component: (user) => <Qualities qualities={user.qualities} />
         },
-        professions: { path: "profession.name", name: "Профессия" },
-        completedMeetings: {
-            path: "completedMeetings",
-            name: "Встретился, раз"
-        },
-        rate: { path: "rate", name: "Оценка" },
-        bookmark: {
-            path: "bookmark",
-            name: "Избранное",
-            component: (user) => (
-                <BookMark
-                    status={user.bookmark}
-                    onClick={() => onToggleBookMark(user._id)}
-                />
-            )
-        },
-        delete: {
-            component: (user) => (
-                <button
-                    onClick={() => onDelete(user._id)}
-                    className="btn btn-danger"
-                >
-                    delete
-                </button>
-            )
+        professions: {
+            name: "Профессия",
+            component: (user) => <Profession id={user.profession} />,
+            completedMeetings: {
+                path: "completedMeetings",
+                name: "Встретился, раз"
+            },
+            rate: { path: "rate", name: "Оценка" },
+            bookmark: {
+                path: "bookmark",
+                name: "Избранное",
+                component: (user) => (
+                    <BookMark
+                        status={user.bookmark}
+                        onClick={() => onToggleBookMark(user._id)}
+                    />
+                )
+            },
+            delete: {
+                component: (user) => (
+                    <button
+                        onClick={() => onDelete(user._id)}
+                        className="btn btn-danger"
+                    >
+                        delete
+                    </button>
+                )
+            }
         }
     };
     return (

@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import qualityService from "../services/quality.service";
 import { toast } from "react-toastify";
 
-const QualityContext = React.createContext();
+const QualitiesContext = React.createContext();
 export const useQualities = () => {
-    return useContext(QualityContext);
+    return useContext(QualitiesContext);
 };
 
-export const QualityProvider = ({ children }) => {
+export const QualitiesProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true);
     const [qualities, setQualities] = useState([]);
     const [error, setError] = useState(null);
@@ -33,19 +33,18 @@ export const QualityProvider = ({ children }) => {
             const { content } = await qualityService.get();
 
             setQualities(content);
-            console.log("надо глянуть в каком виде они приходят", content);
             setLoading(false);
         } catch (error) {
             errorCatcher(error);
         }
     }
     return (
-        <QualityContext.Provider value={{ isLoading, qualities, getQuality }}>
-            {!isLoading ? children : <h1>Qualities Loading...</h1>}
-        </QualityContext.Provider>
+        <QualitiesContext.Provider value={{ isLoading, qualities, getQuality }}>
+            {children}
+        </QualitiesContext.Provider>
     );
 };
-QualityProvider.propTypes = {
+QualitiesProvider.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node

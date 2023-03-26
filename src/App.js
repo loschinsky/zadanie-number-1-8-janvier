@@ -6,13 +6,13 @@ import Main from "./layouts/main";
 import Users from "./layouts/users";
 import { ToastContainer } from "react-toastify";
 import { ProffesionProvider } from "./hooks/useProffesion";
-import { QualityProvider } from "./hooks/useQualities";
+import { QualitiesProvider } from "./hooks/useQualities";
 function App() {
     return (
         <div>
             <NavBar />
-            <ProffesionProvider>
-                <QualityProvider>
+            <QualitiesProvider>
+                <ProffesionProvider>
                     <Switch>
                         <Route
                             path="/users/:userId?/:edit?"
@@ -23,8 +23,8 @@ function App() {
                         <Route exact path="/" component={Main} />
                         <Redirect to="/" />
                     </Switch>
-                </QualityProvider>
-            </ProffesionProvider>
+                </ProffesionProvider>
+            </QualitiesProvider>
             <ToastContainer />
         </div>
     );

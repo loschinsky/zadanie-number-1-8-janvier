@@ -12,12 +12,7 @@ export const QualitiesProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true);
     const [qualities, setQualities] = useState([]);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        if (error !== null) {
-            toast(error);
-            setError(error);
-        }
-    }, [error]);
+
     useEffect(() => {
         getQualitiesList();
     }, []);
@@ -25,6 +20,12 @@ export const QualitiesProvider = ({ children }) => {
         const { message } = error.response.data;
         setError(message);
     }
+    useEffect(() => {
+        if (error !== null) {
+            toast(error);
+            setError(error);
+        }
+    }, [error]);
     function getQuality(id) {
         return qualities.find((p) => p._id === id);
     }

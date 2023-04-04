@@ -29,32 +29,32 @@ const UserTable = ({
         },
         professions: {
             name: "Профессия",
-            component: (user) => <Profession id={user.profession} />,
-            completedMeetings: {
-                path: "completedMeetings",
-                name: "Встретился, раз"
-            },
-            rate: { path: "rate", name: "Оценка" },
-            bookmark: {
-                path: "bookmark",
-                name: "Избранное",
-                component: (user) => (
-                    <BookMark
-                        status={user.bookmark}
-                        onClick={() => onToggleBookMark(user._id)}
-                    />
-                )
-            },
-            delete: {
-                component: (user) => (
-                    <button
-                        onClick={() => onDelete(user._id)}
-                        className="btn btn-danger"
-                    >
-                        delete
-                    </button>
-                )
-            }
+            component: (user) => <Profession id={user.profession} />
+        },
+        completedMeetings: {
+            path: "completedMeetings",
+            name: "Встретился, раз"
+        },
+        rate: { path: "rate", name: "Оценка" },
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => (
+                <BookMark
+                    status={user.bookmark}
+                    onClick={() => onToggleBookMark(user._id)}
+                />
+            )
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    onClick={() => onDelete(user._id)}
+                    className="btn btn-danger"
+                >
+                    delete
+                </button>
+            )
         }
     };
     return (

@@ -11,6 +11,7 @@ const SelectField = ({
     name
 }) => {
     const handleChange = ({ target }) => {
+        console.log("что такое таргет", target);
         onChange({ name: target.name, value: target.value });
     };
     const getInputClasses = () => {
@@ -39,7 +40,6 @@ const SelectField = ({
                 </option>
                 {optionsArray.length > 0 &&
                     optionsArray.map((option) => {
-                        console.log(option);
                         return (
                             <option value={option.value} key={option.value}>
                                 {option.label}

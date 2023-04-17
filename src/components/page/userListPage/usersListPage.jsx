@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { paginate } from "../../../utils/paginate";
 import Pagination from "../../common/pagination";
-
+import { useAuth } from "../../../hooks/useAuth";
 import GroupList from "../../common/groupList";
 import SearchStatus from "../../ui/searchStatus";
 import UserTable from "../../ui/usersTable";
 import _ from "lodash";
-import { useUser } from "../../../hooks/useUsers";
+import { useUsers } from "../../../hooks/useUsers";
 import { useProffesions } from "../../../hooks/useProffesion";
 const UsersListPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -18,8 +18,8 @@ const UsersListPage = () => {
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const pageSize = 8;
 
-    const { users } = useUser();
-
+    const { users } = useUsers();
+    const { currentUser } = useAuth();
     const handleDelete = (userId) => {
         console.log(userId);
     };
@@ -54,21 +54,24 @@ const UsersListPage = () => {
     };
 
     if (users) {
-        const filteredUsers = searchQuery
-            ? users.filter(
-                  (user) =>
-                      user.name
-                          .toLowerCase()
-                          .indexOf(searchQuery.toLowerCase()) !== -1
-              )
-            : selectedProf
-            ? users.filter(
-                  (user) =>
-                      JSON.stringify(user.profession) ===
-                      JSON.stringify(selectedProf)
-              )
-            : users;
-
+        function filterUsers(data) {
+            const filteredUsers = searchQuery
+                ? data.filter(
+                      (user) =>
+                          user.name
+                              .toLowerCase()
+                              .indexOf(searchQuery.toLowerCase()) !== -1
+                  )
+                : selectedProf
+                ? data.filter(
+                      (user) =>
+                          JSON.stringify(user.profession) ===
+                          JSON.stringify(selectedProf)
+                  )
+                : data;
+            return filteredUsers.filter((u) => u._id !== currentUser._id);
+        }
+        const filteredUsers = filterUsers(users);
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
             filteredUsers,
@@ -128,8 +131,10 @@ const UsersListPage = () => {
             </div>
         );
     }
+
     return "loading...";
 };
+
 UsersListPage.propTypes = {
     users: PropTypes.array
 };

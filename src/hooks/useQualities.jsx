@@ -17,8 +17,7 @@ export const QualitiesProvider = ({ children }) => {
         getQualitiesList();
     }, []);
     function errorCatcher(error) {
-        const { message } = error.response.data;
-        setError(message);
+        setError(error);
     }
     useEffect(() => {
         if (error !== null) {
@@ -31,7 +30,7 @@ export const QualitiesProvider = ({ children }) => {
     }
     async function getQualitiesList() {
         try {
-            const { content } = await qualityService.get();
+            const { content } = await qualityService.fetchAll();
 
             setQualities(content);
             setLoading(false);

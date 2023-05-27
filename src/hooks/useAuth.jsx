@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import localStorageService, {
     setTokens
 } from "../services/localStorage.service";
+import getRandomInt from "../utils/getRandomInt";
 
 export const httpAuth = axios.create({
     baseURL: "https://identitytoolkit.googleapis.com/v1/",
@@ -25,9 +26,7 @@ const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const history = useHistory();
-    function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+
     async function signUp({ email, password, ...rest }) {
         try {
             const { data } = await httpAuth.post(`accounts:signUp`, {
@@ -40,8 +39,8 @@ const AuthProvider = ({ children }) => {
             await createUser({
                 _id: data.localId,
                 email,
-                rate: randomInt(1, 5),
-                completedMeetings: randomInt(0, 200),
+                rate: getRandomInt(1, 5),
+                completedMeetings: getRandomInt(0, 200),
                 image: `https://avatars.dicebear.com/api/avataaars/${(
                     Math.random() + 1
                 )

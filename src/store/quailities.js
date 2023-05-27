@@ -15,7 +15,6 @@ const qualitiesSlice = createSlice({
         },
         qualitiesReceved: (state, action) => {
             state.entities = action.payload;
-            state.lastFetch = Date.now();
             state.isLoading = false;
         },
         qualitiesRequestFailed: (state, action) => {

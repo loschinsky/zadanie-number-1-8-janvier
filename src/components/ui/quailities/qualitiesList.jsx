@@ -10,7 +10,7 @@ import {
 
 const Qualities = ({ qualities }) => {
     const dispatch = useDispatch();
-    const isLoading = useSelector(useSelector(getQualitiesLoadingStatus));
+    const isLoading = useSelector(getQualitiesLoadingStatus());
 
     const qualitiesList = useSelector(getQualitiesByIds(qualities));
     useEffect(() => {
